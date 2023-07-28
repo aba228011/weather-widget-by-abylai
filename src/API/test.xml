@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<current>
+    <city id="2643743" name="London">
+        <coord lon="-0.1257" lat="51.5085"></coord>
+        <country>GB</country>
+        <timezone>0</timezone>
+        <sun rise="2023-02-23T06:59:29" set="2023-02-23T17:28:42"></sun>
+    </city>
+    <temperature value="5.87" min="5.12" max="6.67" unit="celsius"></temperature>
+    <feels_like value="3.16" unit="celsius"></feels_like>
+    <humidity value="92" unit="%"></humidity>
+    <pressure value="1014" unit="hPa"></pressure>
+    <wind>
+        <speed value="3.6" unit="m/s" name="Gentle Breeze"></speed>
+        <gusts></gusts>
+        <direction value="350" code="N" name="North"></direction>
+    </wind>
+    <clouds value="75" name="broken clouds"></clouds>
+    <visibility value="10000"></visibility>
+    <precipitation mode="no"></precipitation>
+    <weather number="803" value="broken clouds" icon="04n"></weather>
+    <lastupdate value="2023-02-23T03:49:40"></lastupdate>
+</current>

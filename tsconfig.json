@@ -1,0 +1,19 @@
+{
+  // https://v3.nuxtjs.org/concepts/typescript
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "lib": ["ES2017", "DOM"],
+    "isolatedModules": true,
+    "types": ["vite/client"],
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "include": ["./src/types/*"],
+    "typeRoots": [
+      "./src/types"
+    ],
+    "strict": false
+  }
+
+}
