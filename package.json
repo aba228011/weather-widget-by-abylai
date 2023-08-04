@@ -13,6 +13,7 @@
     "tsconfig": "^7.0.0",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
+    "vuedraggable": "^4.1.0",
     "vuetify": "^3.1.6",
     "yarn": "^1.22.19"
   },

@@ -7,7 +7,7 @@
     </v-row>
     <v-row v-if="isShowSettings">
       <v-col cols="12">
-        <city-weather-card-list :citiesList="citiesList" />
+        <city-weather-card-list :citiesList="citiesList" @onChangePlace="onChangePlace"/>
 
         <div class="d-flex justify-space-between">
           <v-text-field
@@ -36,19 +36,48 @@
 import {defineComponent} from 'vue';
 import cityWeatherWidget from "@/modules/city-weather-widget.vue";
 import CityWeatherCardList from "@/modules/city-weather-card-list.vue";
+// import Draggable from "vuedraggable";
 
 export default defineComponent({
   name: "main-page",
   components: {CityWeatherCardList, cityWeatherWidget},
   data: () => ({
     weatherData: null,
-    citiesList: ['London', 'Moscow'],
-    cityName: '',
+    citiesList: [
+      {
+        id: 1,
+        cityName: "London",
+      },
+      {
+        id: 2,
+        cityName: "Moscow",
+      },
+      {
+        id: 3,
+        cityName: "Berlin",
+      },
+    ],
+    cityName: null,
     isShowSettings: true,
   }),
   methods: {
     addCity() {
-      this.citiesList.push(this.cityName);
+      const id = this.citiesList.length;
+      const cityObj = {
+        id: id,
+        cityName: this.cityName
+      };
+      this.citiesList.push(cityObj);
+
+    },
+    onChangePlace(objMovedPositions) {
+      if (objMovedPositions.oldIndex > objMovedPositions.newIndex) {
+        this.citiesList.splice(objMovedPositions.newIndex, 0, this.citiesList[objMovedPositions.oldIndex]);
+        this.citiesList.splice(objMovedPositions.oldIndex + 1, 1);
+      } else {
+        this.citiesList.splice(objMovedPositions.newIndex + 1, 0, this.citiesList[objMovedPositions.oldIndex]);
+        this.citiesList.splice(objMovedPositions.oldIndex, 1);
+      }
     }
   }
 })
