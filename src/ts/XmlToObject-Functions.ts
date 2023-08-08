@@ -1,11 +1,14 @@
-export function strToXml(strXml) {
+import type {Forecast} from "@/types";
+import {ref} from "vue";
+
+export function strToXml(strXml: string) {
     try {
         let text, parser, xmlDoc;
         text = strXml;
         parser = new DOMParser();
         xmlDoc = parser.parseFromString(text, "text/xml");
-
-        const xmlObject = {}
+        const xmlObject: Forecast = {} as Forecast;
+        // const xmlObject1 = ref<Forecast>({} as Forecast);
         if (!!xmlDoc.all.length) {
             xmlObject[xmlDoc.all[0].nodeName] = {}
             const item = xmlDoc.getElementsByTagName(xmlDoc.all[0].nodeName)
@@ -33,7 +36,7 @@ export function strToXml(strXml) {
     }
 }
 
-function recursiveReturnXmlNodeToObject(item) {
+function recursiveReturnXmlNodeToObject(item: any) {
     const obj = {}
     if (item.textContent === item.innerHTML) {
         obj['contentValue'] = item.textContent

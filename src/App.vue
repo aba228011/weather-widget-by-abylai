@@ -1,10 +1,11 @@
 <script setup lang="ts">
 
+import MainPage from "@/components/main-page.vue";
 </script>
 
 <template>
-  <v-app style="background-color: #888888">
-    <router-view />
+  <v-app>
+    <main-page />
   </v-app>
 </template>
 

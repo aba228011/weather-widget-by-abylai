@@ -1,42 +1,42 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
-import {getWeatherActs} from "@/actions/get-weather";
+import { ref } from "vue";
 import Draggable from "vuedraggable";
+import type {Forecast} from "@/types";
 
-const props = defineProps(['citiesList'])
+const props = defineProps({
+  citiesList: Array<Forecast>
+});
 
-const emit = defineEmits(['onChangePlace'])
+const emit = defineEmits(['onChangePlace', 'delCity']);
 
-onMounted(async () => await getDataByCityName(props.citiesList[0].cityName));
-const getDataByCityName = async (cityName: string) => {
-  try {
-    await getWeatherActs.getByCityName(cityName)
-  } catch (ex) {
-    console.error(ex);
-  }
-};
 const dragOptions = ref({
   group: 'items',
   handle: '.draggable-item', // Укажите здесь класс элементов, на которых должно срабатывать перетаскивание
 });
 
-const onChangePlace = (movedObj) => {
+const onChangePlace = (movedObj: any) => {
   emit('onChangePlace', {'newIndex': movedObj.moved.newIndex, 'oldIndex': movedObj.moved.oldIndex})
-}
+};
+const delCity = (id) => {
+  emit('delCity', {'id': id})
+};
 </script>
 
 <template>
   <div>
-    <draggable v-bind="dragOptions" :model-value="props.citiesList" @change="onChangePlace" item-key="id">
+    <draggable v-bind="dragOptions" :model-value="props.citiesList" @change="onChangePlace"
+               item-key="current.city.attributes.id">
       <template #item="{ element }">
         <div class="d-flex justify-space-between" style="max-width: 344px; margin: 0 auto">
           <div class="drag-item draggable-item">
             change
           </div>
-          <v-btn @click="$router.push(`/weather-info/${element.cityName}`)" variant="outlined">
-            {{ element.cityName }}
+          <v-btn variant="outlined">
+            {{ element.current.city.attributes.name }}
           </v-btn>
-          <div>x</div>
+          <v-btn @click="delCity(element.current.city.attributes.id)" variant="elevated">
+            x
+          </v-btn>
         </div>
       </template>
     </draggable>
