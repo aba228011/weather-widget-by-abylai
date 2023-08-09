@@ -1,7 +1,7 @@
 import type {Forecast} from "@/types";
 import {ref} from "vue";
 
-export function strToXml(strXml: string) {
+export function strToXml(strXml: string): Forecast {
     try {
         let text, parser, xmlDoc;
         text = strXml;
